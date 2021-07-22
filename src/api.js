@@ -54,9 +54,9 @@ router.get("/:date", (req, res) => {
         "ddd, DD MMM YYYY HH:mm:ss"
       );
     }
-    res.send({ unix: unixValue, utc: utcValue + " GMT" });
+    res.json({ unix: unixValue, utc: utcValue + " GMT" });
   } else {
-    res.send({ error: "Invalid Date" });
+    res.json({ error: "Invalid Date" });
   }
 });
 
@@ -67,7 +67,7 @@ router.get("/", (req, res) => {
     .utc()
     .tz("Atlantic/Reykjavik")
     .format("ddd, DD MMM YYYY HH:mm:ss");
-  res.send({ unix: unixValue, utc: utcValue + " GMT" });
+  res.json({ unix: unixValue, utc: utcValue + " GMT" });
 });
 
 app.use(`/.netlify/functions/api`, router);
