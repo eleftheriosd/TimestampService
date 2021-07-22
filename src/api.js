@@ -5,6 +5,10 @@ const moment = require("moment-timezone");
 const app = express();
 const router = express.Router();
 
+// so that your API is remotely testable by FCC
+var cors = require("cors");
+app.use(cors({ optionsSuccessStatus: 200 })); // some legacy browsers choke on 204
+
 // Check if date is valid
 const checkValidDate = (date) => {
   var dateFormat1 = "YYYY-MM-DD";
@@ -50,9 +54,9 @@ router.get("/:date", (req, res) => {
         "ddd, DD MMM YYYY HH:mm:ss"
       );
     }
-    res.json({ unix: unixValue, utc: utcValue + " GMT" });
+    res.send({ unix: unixValue, utc: utcValue + " GMT" });
   } else {
-    res.json({ error: "Invalid Date" });
+    res.send({ error: "Invalid Date" });
   }
 });
 
